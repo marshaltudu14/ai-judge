@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import HomeClient from "./home-client";
 
 export const metadata: Metadata = {
   title: "kanoon.ai - Your AI Legal Assistant for Everyone",
@@ -15,6 +14,19 @@ export const metadata: Metadata = {
   },
 };
 
-export default function HomePage() {
-  return <HomeClient />;
-}
+import React from 'react';
+import HeroSection from '@/components/landing/HeroSection';
+import FeatureHighlights from '@/components/landing/FeatureHighlights';
+import TrustSection from '@/components/landing/TrustSection';
+
+const LandingPage: React.FC = () => {
+  return (
+    <>
+      <HeroSection />
+      <FeatureHighlights />
+      <TrustSection />
+    </>
+  );
+};
+
+export default LandingPage;
