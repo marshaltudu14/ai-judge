@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearchParams } from 'next/navigation';
+import { Suspense } from 'react';
 import React, { useState, useEffect } from 'react';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,7 +11,7 @@ import TopicSuggestions from '@/components/chat/TopicSuggestions';
 
 import { Message, ChatSession } from '@/types';
 
-const ChatPage: React.FC = () => {
+function ChatClientInner() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('session') || 'default';
 
@@ -247,8 +248,6 @@ I'd be happy to help you with legal information. Based on your query, here are s
 Would you like me to provide more specific information about any particular aspect of your legal question?`;
   };
 
-  
-
   return (
     <div className="flex flex-col flex-1 h-full">
       {/* Topic Suggestions */}
@@ -283,6 +282,14 @@ Would you like me to provide more specific information about any particular aspe
       </div>
     </div>
   );
+}
+
+const ChatClient: React.FC = () => {
+  return (
+    <Suspense fallback={<div className="flex items-center justify-center h-64">Loading chat...</div>}>
+      <ChatClientInner />
+    </Suspense>
+  );
 };
 
-export default ChatPage;
+export default ChatClient;

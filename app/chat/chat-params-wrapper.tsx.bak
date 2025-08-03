@@ -1,0 +1,16 @@
+"use client";
+
+import { Suspense } from 'react';
+import ChatClient from './chat-client';
+
+function ChatClientWrapper() {
+  return <ChatClient />;
+}
+
+export default function ChatParamsWrapper() {
+  return (
+    <Suspense fallback={<div>Loading chat...</div>}>
+      <ChatClientWrapper />
+    </Suspense>
+  );
+}
